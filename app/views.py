@@ -9,6 +9,8 @@ from app import app
 from flask import render_template, request, redirect, url_for, flash
 
 
+
+
 ###
 # Routing for your application.
 ###
@@ -22,13 +24,27 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Samantha Jamess")
 
+@app.route('/profile')
+def profile():
+    from datetime import date
+    date = date.today().strftime("%B, %Y")
+    return render_template('profile.html', fdate= date)
+  
+@app.route('/other')
+def other():
+    return redirect(url_for('static', filename= 'me.jpg'))
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 
+def format_date_joined(date):
+    from datetime import date
+    date = date.today().strftime("%B, %Y")
+    
+    
 @app.route('/<file_name>.txt')
 def send_text_file(file_name):
     """Send your static text file."""
